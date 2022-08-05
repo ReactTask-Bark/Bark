@@ -1,20 +1,40 @@
 import styled from "styled-components"
 
+import Header from "components/header/Header";
+import Main from "view/Main";
+
 
 function App() {
   return (
-    <Container>
-    </Container>
+    <>
+      <HeaderArea>
+        <Layout>
+          <Header/>
+        </Layout>
+      </HeaderArea>
+      <MainArea>
+        <Layout>
+          <Main/>
+        </Layout>
+      </MainArea>
+    </>
   );
 }
 
-const Container = styled.div`
+const Layout = styled.div`
   max-width: 1200px;
   min-width: 800px;
-  height: 100vh;
   margin: auto;
-
-  background-color: rgba(255, 204, 204,.3);
 `;
+
+const HeaderArea = styled.div`
+  min-width: 800px;
+  box-shadow: 0 0 5px 0;
+`
+const MainArea = styled.div`
+  min-width: 800px;
+  background: rgba(255, 204, 204, .1);
+  min-height: calc(100vh - 200px);
+`
 
 export default App;
