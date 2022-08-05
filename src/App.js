@@ -1,9 +1,10 @@
 import styled from "styled-components"
-
+import WriteBoard from "./view/WriteBoard"
 
 function App() {
   return (
     <Container>
+      <WriteBoard />
     </Container>
   );
 }
