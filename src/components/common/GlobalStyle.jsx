@@ -22,6 +22,15 @@ time, mark, audio, video {
 * {
 	box-sizing: border-box;
 }
+hr {
+	margin: 0;
+	border-color: rgba(255,255,255,0.3);
+}
+.fcc {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 `
 
 export default GlobalStyle
