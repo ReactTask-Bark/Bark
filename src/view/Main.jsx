@@ -1,9 +1,14 @@
+import CardList from "components/cardList/CardList"
+import FixedForm from "components/form/FixedForm"
+
 const Main = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <CardList/>
+            <FixedForm/>
+        </>
     )
 }
+
 
 export default Main
