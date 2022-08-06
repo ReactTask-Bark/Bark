@@ -31,6 +31,7 @@ const Container = styled.header`
 `
 
 const HeaderLogo = styled(Profile)`
+    cursor: pointer;
     width: 150px;
     height: 150px;
     & > img {
