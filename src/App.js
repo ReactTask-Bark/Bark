@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import WriteBoard from "./view/WriteBoard"
 import Header from "components/header/Header";
 import Main from "view/Main";
 
@@ -14,13 +14,11 @@ function App() {
       </HeaderArea>
       <MainArea>
         <Layout>
-          <Main/>
+        <WriteBoard />
         </Layout>
       </MainArea>
     </>
-  );
-}
-
+)}
 const Layout = styled.div`
   max-width: 1200px;
   min-width: 800px;
