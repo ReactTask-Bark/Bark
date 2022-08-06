@@ -3,7 +3,7 @@ import styled from "styled-components"
 const TitleText = (props) => {
     const titleSize = props.titleSize ? props.titleSize : '20'
     return(
-        <Container titleSize={props.titleSize}>{props.children}</Container>
+        <Container titleSize={titleSize}>{props.children}</Container>
     );
 }
 
