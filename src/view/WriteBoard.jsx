@@ -4,39 +4,55 @@ import Header from "../components/header/Header"; //components Header 연결해�
 
 function WriteBoard() {
   return (
-    <A>
-      <B>
-        <p> 작성자 </p>
-        <p> 내용 </p>
+    <Board>
+      <HeadArea>
         <div>
-          <button style={{ margin: "0 10px" }}>등록</button>
-          <button>취소</button>
+          <div>제목 : </div>
+          <div>내용 : </div>
         </div>
-      </B>
-    </A>
+
+        <div>내가 제목이다!</div>
+      </HeadArea>
+
+      <div>
+        <Contents>내가 내용이다!</Contents>
+        <ButtonArea>
+          <button>수정</button>
+          <button>삭제</button>
+          <button>뒤로가기</button>
+        </ButtonArea>
+      </div>
+    </Board>
   );
 }
 
-const A = styled.div`
-  font-size: 30px;
-  border: 3px solid rgb(176, 80, 80);
-  border-radius: 12px;
-  padding: 12px 24px 24px;
+const Contents = styled.div`
+  height: 300px;
+  border: 1px solid red;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 0;
+`;
+
+const Board = styled.div`
   width: 600px;
-  height: 700px;
+  height: 600px;
+  margin: 30px auto;
+  border: 1px solid black;
+  border-radius: 15px;
+  box-shadow: 0 0 5px 0;
+
+`;
+
+const HeadArea = styled.div`
   display: flex;
- 
+  justify-content: space-between;;
+  margin: 10px;
+  
 `;
-const B = styled.div`
-  .body {
-    border: 2px solid rgb(238, 238, 238);
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-  }
+
+const ButtonArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 `;
-export default WriteBoard; //내보내자~
+export default WriteBoard;
