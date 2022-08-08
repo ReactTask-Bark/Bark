@@ -1,47 +1,54 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
-import Profile from "components/common/Profile"
-import TitleText from "components/common/TitleText"
-import image from "Asset/BarkLogo.png"
+import Profile from "components/common/Profile";
+import TitleText from "components/common/TitleText";
+import image from "Asset/BarkLogo.png";
+
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-    return (
-        <Container className="fcc" jc="space-between">
-            <div className="fcc">
-                <HeaderLogo>
-                    <img src={image}/>
-                </HeaderLogo>
-                <TitleText titleSize="40">
-                    <p>Bark</p>
-                    <div>@ 함께 짖어봐요!</div>
-                </TitleText>
-            </div>
-            <div>
-                <TitleText titleSize="25">
-                    <p>주특기 3주차</p>
-                </TitleText>
-            </div>
-        </Container>
-    )
-}
+  const navigate = useNavigate();
+  return (
+    <Container className="fcc" jc="space-between">
+      <div className="fcc">
+        <HeaderLogo
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          <img src={image} />
+        </HeaderLogo>
+        <TitleText titleSize="40">
+          <p>Bark</p>
+          <div>@ 함께 짖어봐요!</div>
+        </TitleText>
+      </div>
+      <div>
+        <TitleText titleSize="25">
+          <p>주특기 3주차</p>
+        </TitleText>
+      </div>
+    </Container>
+  );
+};
 
 const Container = styled.header`
-    justify-content: ${props => props.jc} !important;
-    padding: 15px;
-`
+  justify-content: ${(props) => props.jc} !important;
+  padding: 15px;
+`;
 
 const HeaderLogo = styled(Profile)`
-    cursor: pointer;
-    width: 150px;
-    height: 150px;
-    & > img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-    }
-    transition-duration: .5s;
-    &:hover {
-        background-color: rgb(255,204,204);
-    }
-`
-export default Header
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+  & > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  transition-duration: 0.5s;
+  &:hover {
+    background-color: rgb(255, 204, 204);
+  }
+`;
+export default Header;
