@@ -1,22 +1,34 @@
 import React from "react"; //가져오자~
 import styled from "styled-components"; // styled-components에서 styled 키워드 가져와
+<<<<<<< HEAD
 import Header from "components/header/Header";
+=======
+>>>>>>> ab510adc0f4dee56a0d64df8a36ae7c5ada30c27
 
 function WriteBoard() {
   return (
     <>
+<<<<<<< HEAD
       <Layout>
         <Header />
       </Layout>
       <Board>
         <HeadArea>
+=======
+      <Board>
+        <BoardTopArea>
+>>>>>>> ab510adc0f4dee56a0d64df8a36ae7c5ada30c27
           <div>
             <div>제목 : </div>
             <div>내용 : </div>
           </div>
 
           <div>내가 제목이다!</div>
+<<<<<<< HEAD
         </HeadArea>
+=======
+        </BoardTopArea>
+>>>>>>> ab510adc0f4dee56a0d64df8a36ae7c5ada30c27
 
         <div>
           <Contents>내가 내용이다!</Contents>
@@ -31,6 +43,7 @@ function WriteBoard() {
   );
 }
 
+<<<<<<< HEAD
 const Layout = styled.div`
   max-width: 1200px;
   min-width: 800px;
@@ -38,6 +51,8 @@ const Layout = styled.div`
 `;
 
 
+=======
+>>>>>>> ab510adc0f4dee56a0d64df8a36ae7c5ada30c27
 const Contents = styled.div`
   height: 300px;
   margin: 10px;
@@ -61,6 +76,7 @@ const Board = styled.div`
   box-shadow: 0 0 5px 0;
 `;
 
+<<<<<<< HEAD
 const HeadArea = styled.div`
   display: flex;
   justify-content: space-between;
@@ -77,6 +93,24 @@ const ButtonArea = styled.div`
   justify-content: center;
   align-items: flex-start;
 `;
+=======
+const BoardTopArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+
+  display: flex;
+  font-size: 15px;
+  font-weight: bold;
+  color: #e2a9a9;
+`;
+
+const ButtonArea = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+`;
+>>>>>>> ab510adc0f4dee56a0d64df8a36ae7c5ada30c27
 const Btn = styled.button`
   cursor: pointer;
   width: 45px;
