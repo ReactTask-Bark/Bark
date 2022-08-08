@@ -2,12 +2,13 @@ import styled, { keyframes } from "styled-components"
 
 import Profile from "components/common/Profile"
 import image from "Asset/BarkLogo.png"
+import FullPage from "components/common/FullPage"
 
 const LoadingPage = () => {
     return (
-        <Page className="fcc">
+        <FullPage className="fcc">
             <Logo src={image}/>
-        </Page>
+        </FullPage>
     )
 }
 
@@ -24,11 +25,6 @@ const boxFade = keyframes`
   }
 `;
 
-const Page = styled.div`
-    position: fixed;
-    top:0; right: 0; bottom: 0; left: 0;
-    background: rgb(255,204,204);
-`
 const Logo = styled(Profile)`
     width: 200px;
     height: 200px;
