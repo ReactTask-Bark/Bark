@@ -1,13 +1,15 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { forwardRef } from "react";
 
 import TitleText from "components/common/TitleText";
 import Profile from "components/common/Profile";
 import image from "Asset/BarkLogo.png"
 
-const Card = (props) => {
+// forwardRef = ref 하위로 전달용
+const Card = forwardRef((props, ref) => {
   const card = props.card;
-  const writeDate = card.writeDate.toLocaleString("ko-KR", {
+  const writeDate = new Date(card.writeDate).toLocaleString("ko-KR", {
     month: "long",
     day: "numeric"
   })
@@ -15,8 +17,9 @@ const Card = (props) => {
   return (
     <CardContainer
       onClick={() => {
-        navigate("/detailpost/" + card.id);
+        navigate("/detailpost/" + card.postId);
       }}
+      ref={ref}
     >
       <TitleText>
         <div className="fcc" style={{ justifyContent: "flex-start" }}>
@@ -32,10 +35,10 @@ const Card = (props) => {
       </TitleText>
     </CardContainer>
   );
-};
+});
 
 const CardContainer = styled.div`
-  margin-top: 30px;
+  margin: 30px 0;
   width: 40%;
   border: 1px solid rgb(255, 204, 204);
   border-radius: 25px;
