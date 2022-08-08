@@ -1,20 +1,20 @@
-import styled from "styled-components"
-import WriteBoard from "./view/WriteBoard"
+import styled from "styled-components";
 import Header from "components/header/Header";
-import Main from "view/Main";
-
+// import Main from "view/Main";
+import DetailBoard from "view/DetailBoard";
+import Router from "shared/Router";
 
 function App() {
   return (
     <>
       <HeaderArea>
         <Layout>
-          <Header/>
+          <Header />
         </Layout>
       </HeaderArea>
       <MainArea>
         <Layout>
-        <WriteBoard />
+          <Router></Router>
         </Layout>
       </MainArea>
     </>
@@ -28,11 +28,11 @@ const Layout = styled.div`
 const HeaderArea = styled.div`
   min-width: 800px;
   box-shadow: 0 0 5px 0;
-`
+`;
 const MainArea = styled.div`
   min-width: 800px;
-  background: rgba(255, 204, 204, .1);
+  background: rgba(255, 204, 204, 0.1);
   min-height: calc(100vh - 200px);
-`
+`;
 
 export default App;
