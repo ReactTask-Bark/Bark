@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Header from "components/header/Header";
 // import Main from "view/Main";
 import DetailBoard from "view/DetailBoard";
+import Router from "shared/Router";
 
 function App() {
   return (
@@ -14,8 +15,7 @@ function App() {
       </HeaderArea>
       <MainArea>
         <Layout>
-          {/* <Main /> */}
-          <DetailBoard />
+          <Router></Router>
         </Layout>
       </MainArea>
     </>
