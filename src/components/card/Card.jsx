@@ -1,10 +1,16 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import TitleText from "components/common/TitleText";
-import { useNavigate } from "react-router-dom";
+import Profile from "components/common/Profile";
+import image from "Asset/BarkLogo.png"
 
 const Card = (props) => {
   const card = props.card;
+  const writeDate = card.writeDate.toLocaleString("ko-KR", {
+    month: "long",
+    day: "numeric"
+  })
   const navigate = useNavigate();
   return (
     <CardContainer
@@ -13,13 +19,16 @@ const Card = (props) => {
       }}
     >
       <TitleText>
+        <div className="fcc" style={{ justifyContent: "flex-start" }}>
+          <CardProfile src={image}/>
+          <div>
+            <CardAuthor className="fcc">{card.author}</CardAuthor>
+            <CardDate className="fcc" style={{ justifyContent: "flex-start" }}>{writeDate}</CardDate>
+          </div>
+        </div>
         <p className="fcc" style={{ minHeight: "100px" }}>
           {card.contents}
         </p>
-        <div className="fcc" style={{ justifyContent: "space-around" }}>
-          <span>{card.writeDate}</span>
-          <span>{card.author}</span>
-        </div>
       </TitleText>
     </CardContainer>
   );
@@ -37,5 +46,18 @@ const CardContainer = styled.div`
     background: rgba(255, 204, 204, 0.3);
   }
 `;
+
+const CardProfile = styled(Profile)`
+  width: 50px;
+  height: 50px;
+`;
+
+const CardAuthor = styled.div`
+  height: 25px;
+`
+
+const CardDate = styled(CardAuthor)`
+  font-size: 12px;
+`
 
 export default Card;

@@ -16,6 +16,11 @@ const Container = styled.div`
         font-size: ${props => props.titleSize + 'px'};
         font-weight: bold;
     }
+    & * {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 `
 
 export default TitleText
