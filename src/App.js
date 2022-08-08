@@ -1,10 +1,12 @@
 import styled from "styled-components";
-import Header from "components/header/Header";
-// import Main from "view/Main";
-import DetailBoard from "view/DetailBoard";
 import Router from "shared/Router";
+import { useSelector } from "react-redux"
+
+import Header from "components/header/Header";
+import LoadingPage from "view/Loding";
 
 function App() {
+  const isLoading = useSelector(state => state.post.isLoading)
   return (
     <>
       <HeaderArea>
@@ -15,6 +17,7 @@ function App() {
       <MainArea>
         <Layout>
           <Router></Router>
+          {isLoading && <LoadingPage/>}
         </Layout>
       </MainArea>
     </>
@@ -26,10 +29,14 @@ const Layout = styled.div`
 `;
 
 const HeaderArea = styled.div`
+  position: fixed; top:0;
   min-width: 800px;
+  width: 100%;
   box-shadow: 0 0 5px 0;
+  background: white;
 `;
 const MainArea = styled.div`
+  margin-top: 200px;
   min-width: 800px;
   background: rgba(255, 204, 204, 0.1);
   min-height: calc(100vh - 200px);
