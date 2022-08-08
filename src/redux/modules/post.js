@@ -41,7 +41,7 @@ const postSlice = createSlice({
     },
 });
 
-// action생성자 내보내기
-export const {} = postSlice.actions
+// action생성자 내보내기 => 쓰실때 주석 풀기
+// export const {} = postSlice.actions
 // store에 등록을 위해 export default
 export default postSlice.reducer;
