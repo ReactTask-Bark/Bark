@@ -11,12 +11,11 @@ const Header = () => {
   return (
     <Container className="fcc" jc="space-between">
       <div className="fcc">
-        <HeaderLogo
+        <HeaderLogo src={image}
           onClick={() => {
             navigate("/");
           }}
         >
-          <img src={image} />
         </HeaderLogo>
         <TitleText titleSize="40">
           <p>Bark</p>
@@ -41,11 +40,6 @@ const HeaderLogo = styled(Profile)`
   cursor: pointer;
   width: 150px;
   height: 150px;
-  & > img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
   transition-duration: 0.5s;
   &:hover {
     background-color: rgb(255, 204, 204);

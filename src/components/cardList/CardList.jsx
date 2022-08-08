@@ -1,32 +1,36 @@
 import styled from "styled-components"
+import { useSelector, useDispatch } from "react-redux"
+// 무한 스크롤용
+import { useInView } from "react-intersection-observer"
+import { useEffect, useState } from "react"
 
 import Card from "components/card/Card"
+import { _LoadPostAll } from "redux/modules/post"
 
 const CardList = () => {
-    const dummyList = [
-        {
-            id: '789asdg',
-            contents: '내용1입니다',
-            author: '작성자1입니다',
-            writeDate: '08-05'
-        },
-        {
-            id: '789asd9',
-            contents: '내용2입니다',
-            author: '작성자2입니다',
-            writeDate: '08-06'
-        },
-        {
-            id: '789asd8',
-            contents: '내용3입니다',
-            author: '작성자3입니다',
-            writeDate: '08-07'
-        },
-    ]
-    return(
+    // 무한 스크롤 사용법 : 감시용 ref, boolean용 lastCard
+    const [lastRef, lastCard] = useInView({
+        threshold: 0.8,
+        triggerOnce: true
+    })
+    const [page, setPage] = useState(0)
+    const dispatch = useDispatch()
+    const postList = useSelector(state => state.post.list)
+    // 렌더링 여러번 발생하는거 확인하기 => 일단 기능부터 구현하고 고치기######
+
+    useEffect(() => {
+        dispatch(_LoadPostAll(page))
+    }, [page])
+    useEffect(() => {
+        if(lastCard && page < postList.length) setPage(page + 5)
+    }, [lastCard])
+    return (
         <List className="fcc">
-            {dummyList.map((c) => {
-                return <Card card={c} key={c.id}/>
+            {postList.map((post, i) => {
+                const card = postList.length - 1 === i && postList.length > 4 ? 
+                    <Card card={post} key={post.postId} ref={lastRef}/> :
+                    <Card card={post} key={post.postId}/>
+                return card
             })}
         </List>
     )
