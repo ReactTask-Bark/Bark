@@ -22,11 +22,11 @@ const Card = (props) => {
         <div className="fcc" style={{ justifyContent: "flex-start" }}>
           <CardProfile src={image}/>
           <div>
-            <CardAuthor className="fcc">{card.author}</CardAuthor>
-            <CardDate className="fcc" style={{ justifyContent: "flex-start" }}>{writeDate}</CardDate>
+            <div>{card.author}</div>
+            <div style={{fontSize: "12px"}}>{writeDate}</div>
           </div>
         </div>
-        <p className="fcc" style={{ minHeight: "100px" }}>
+        <p style={{ margin: '10px', height: "80px" }}>
           {card.contents}
         </p>
       </TitleText>
@@ -48,16 +48,8 @@ const CardContainer = styled.div`
 `;
 
 const CardProfile = styled(Profile)`
-  width: 50px;
-  height: 50px;
+  min-width: 50px; width: 50px;
+  min-height: 50px; height: 50px;
 `;
-
-const CardAuthor = styled.div`
-  height: 25px;
-`
-
-const CardDate = styled(CardAuthor)`
-  font-size: 12px;
-`
 
 export default Card;
