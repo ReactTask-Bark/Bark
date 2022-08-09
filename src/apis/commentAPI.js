@@ -8,5 +8,5 @@ export const readAllComments = async (page, postId) => {
 
 export const addComments = async (newComments) => {
     const res = await axios.post(process.env.REACT_APP_COMMENTSPATH, newComments)
-    console.log(res)
+    return res.data.isSuccess
 }
