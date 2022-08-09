@@ -14,7 +14,7 @@ import Modal from "components/common/Modal";
 const Comments = () => {
   const [commentsList, setList] = useState([])
   const [pagingBtn, setPagingBtn] = useState([])
-  const [page, setPage] = useState([])
+  const [page, setPage] = useState(0)
 
   // 강의에 있는 커스텀 훅 살짝 커스텀해서 씀
   const [author, changeAuthor, resetAuthor] = useLimitInput(10)
@@ -34,6 +34,7 @@ const Comments = () => {
       setPagingBtn(pasingNumber)
     })
   }, [page])
+  
   const modalOpen = () => {
     modalRef.current.style.opacity = 1
     modalRef.current.style.zIndex = 100
