@@ -1,22 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-// import { EditAlt } from "@styled-icons/boxicons-regular";
 
-const Post = () => {
+import Button from "components/buttons/Button";
+
+const Post = (props) => {
+  const item = props.comments ? props.comments : props.detailPost
+  const itemWriteDate = new Date(item?.writeDate).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+  })
   return (
     <div>
       <PostInfo>
         <UserImg />
         <UserInfo>
           <div style={{ display: "flex" }}>
-            <UserName>Jack</UserName>
-            <Userdate>2022년 8월 8일</Userdate>
+            <UserName>{item?.author}</UserName>
+            <Userdate>{itemWriteDate}</Userdate>
           </div>
 
-          <UserContent>hello everyone</UserContent>
+          <UserContent>{item?.coContents}</UserContent>
           <ButtonArea>
-            <Button>{/* <EditAlt size="15" /> */} edit</Button>
-            <Button>{/* <EditAlt size="15" /> */}✖ delete</Button>
+            <Button>수정</Button>
+            <Button>삭제</Button>
           </ButtonArea>
         </UserInfo>
       </PostInfo>
@@ -65,10 +72,7 @@ const UserContent = styled.p`
 const ButtonArea = styled.div`
   height: 20px;
   margin-top: 5px;
-`;
-
-const Button = styled.button`
-  border: none;
-  background-color: white;
-  margin-right: 10px;
+  & > button {
+    margin-right: 10px;
+  }
 `;
