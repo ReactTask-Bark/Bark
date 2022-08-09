@@ -1,32 +1,31 @@
 import styled from "styled-components"
 
 const Button = (props) => {
+    const btnColor = 
+    props.children === "등록" ? "#006600" :
+    props.children === "뒤로가기" ? "#CCCC00" : "rgb(255, 204, 204)"
 
+    const btnSize =
+    props.buttonType === "comment" ? "20" : "30"
     if (props.buttonType === "main") {
         return (
-            <MainButton>{props.children}</MainButton>
+            <MainButton onClick={props.onClick} color={btnColor}>{props.children}</MainButton>
         )
     }
     else {
-        const btnColor = 
-        props.children === "등록" ? "#006600" :
-        props.children === "뒤로가기" ? "#CCCC00" : "white"
         return (
-            <CommonButton color={btnColor}>{props.children}</CommonButton>
+            <CommonButton onClick={props.onClick} color={btnColor} size={btnSize}>{props.children}</CommonButton>
         )
     }
 }
-// 예시안
-{/* <Button>등록</Button> */}
-{/* <Button>뒤로가기</Button> */}
 
 const MainButton = styled.button`
     cursor: pointer;
     width: 80px;
     height: 80px;
 
-    background: rgb(255, 204, 204);
-    border: 2px solid rgb(255, 204, 204);
+    background: ${props => props.color};
+    border: 2px solid ${props => props.color};
     border-radius: 50%;
 
     font-size: 50px;
@@ -36,23 +35,16 @@ const MainButton = styled.button`
     transition-duration: 0.5s;
     &:hover {
     background-color: white;
-    color: rgb(255, 204, 204);
+    color: ${props => props.color};
     }
 `
 
 const CommonButton = styled(MainButton)`
-    width: 120px;
-    height: 50px;
-    padding: 10px;
+    width: auto;
+    height: ${props => props.size + "px"};
 
-    background: ${props => props.color};
-    border: 2px solid ${props => props.color};
     border-radius: 25px;
-    font-size: 20px;
-
-    &:hover {
-    color: ${props => props.color};
-    }
+    font-size: ${props => (props.size / 2) + "px"};
 `
 
 export default Button
