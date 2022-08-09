@@ -61,7 +61,6 @@ const Comments = () => {
         setPage(0)
         resetAuthor()
         resetContents()
-        alert('댓글 등록에 성공하셨습니다.')
       }
       else {
         alert('댓글 등록에 실패하셨습니다.')
