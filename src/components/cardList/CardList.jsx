@@ -28,8 +28,8 @@ const CardList = () => {
         <List className="fcc">
             {postList.map((post, i) => {
                 const card = postList.length - 1 === i && postList.length > 4 ? 
-                    <Card card={post} key={post.postid} ref={lastRef}/> :
-                    <Card card={post} key={post.postid}/>
+                    <Card card={post} key={post.postId} ref={lastRef}/> :
+                    <Card card={post} key={post.postId}/>
                 return card
             })}
         </List>
