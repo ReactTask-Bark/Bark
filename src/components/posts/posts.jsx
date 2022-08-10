@@ -1,22 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-// import { EditAlt } from "@styled-icons/boxicons-regular";
+import axios from "axios";
 
 const Post = () => {
+  const postList = useSelector((state) => state.post.list);
+  const param = useParams();
+  const findPost = postList.find((post) => {
+    return post.postId == param.postid;
+  });
+
+  // input값 수정 및 저장
+  const [content, setContent] = useState({
+    contents: findPost.contents,
+  });
+
+  const onChange = (e) => {
+    setContent({
+      ...content,
+      contents: e.target.value,
+    });
+  };
+  const [disabled, setDisabled] = useState(true);
+  const onToggle = (e) => {
+    setDisabled(!disabled);
+  };
+
+  //수정 내용 db에 저장하기
+  const editHandler = (Id, edit) => {
+    axios.patch(`http://localhost:3001/post/${Id}`, edit);
+  };
+
+  const done = (e) => {
+    editHandler(param.postid, content);
+    onToggle(e);
+  };
+
   return (
     <div>
       <PostInfo>
         <UserImg />
         <UserInfo>
           <div style={{ display: "flex" }}>
-            <UserName>Jack</UserName>
+            <UserName>{findPost.author}</UserName>
             <Userdate>2022년 8월 8일</Userdate>
           </div>
-
-          <UserContent>hello everyone</UserContent>
+          <input
+            disabled={disabled}
+            onChange={onChange}
+            value={content.contents}
+          />
           <ButtonArea>
-            <Button>{/* <EditAlt size="15" /> */} edit</Button>
-            <Button>{/* <EditAlt size="15" /> */}✖ delete</Button>
+            {disabled ? (
+              <Button onClick={onToggle}> 수정 </Button>
+            ) : (
+              <Button onClick={done}>저장</Button>
+            )}
+
+            <Button> delete </Button>
           </ButtonArea>
         </UserInfo>
       </PostInfo>
