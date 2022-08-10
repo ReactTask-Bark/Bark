@@ -1,64 +1,29 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
-import axios from "axios";
 
-const Post = () => {
-  const postList = useSelector((state) => state.post.list);
-  const param = useParams();
-  const findPost = postList.find((post) => {
-    return post.postId == param.postid;
+import Button from "components/buttons/Button";
+
+const Post = (props) => {
+  const item = props.comments ? props.comments : props.detailPost;
+  const itemWriteDate = new Date(item?.writeDate).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   });
-
-  // input값 수정 및 저장
-  const [content, setContent] = useState({
-    contents: findPost.contents,
-  });
-
-  const onChange = (e) => {
-    setContent({
-      ...content,
-      contents: e.target.value,
-    });
-  };
-  const [disabled, setDisabled] = useState(true);
-  const onToggle = (e) => {
-    setDisabled(!disabled);
-  };
-
-  //수정 내용 db에 저장하기
-  const editHandler = (Id, edit) => {
-    axios.patch(`http://localhost:3001/post/${Id}`, edit);
-  };
-
-  const done = (e) => {
-    editHandler(param.postid, content);
-    onToggle(e);
-  };
-
   return (
     <div>
       <PostInfo>
         <UserImg />
         <UserInfo>
           <div style={{ display: "flex" }}>
-            <UserName>{findPost.author}</UserName>
-            <Userdate>2022년 8월 8일</Userdate>
+            <UserName>{item?.author}</UserName>
+            <Userdate>{itemWriteDate}</Userdate>
           </div>
-          <input
-            disabled={disabled}
-            onChange={onChange}
-            value={content.contents}
-          />
-          <ButtonArea>
-            {disabled ? (
-              <Button onClick={onToggle}> 수정 </Button>
-            ) : (
-              <Button onClick={done}>저장</Button>
-            )}
 
-            <Button> delete </Button>
+          <UserContent>{item?.coContents}</UserContent>
+          <ButtonArea>
+            <Button>수정</Button>
+            <Button>삭제</Button>
           </ButtonArea>
         </UserInfo>
       </PostInfo>
@@ -107,10 +72,7 @@ const UserContent = styled.p`
 const ButtonArea = styled.div`
   height: 20px;
   margin-top: 5px;
-`;
-
-const Button = styled.button`
-  border: none;
-  background-color: white;
-  margin-right: 10px;
+  & > button {
+    margin-right: 10px;
+  }
 `;
