@@ -2,13 +2,12 @@ import styled from "styled-components";
 import React from "react";
 
 import Comments from "components/comments/comments";
-import Post from "components/posts/posts";
+import DetailPost from "components/posts/detailposts";
 
 const DetailBoard = () => {
-  
   return (
     <BoardLayout>
-      <Post/>
+      <DetailPost />
       <Comments></Comments>
     </BoardLayout>
   );
