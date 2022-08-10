@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { nanoid } from "@reduxjs/toolkit";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import useLimitInput from "hooks/useLimitInput";
 
@@ -23,8 +23,7 @@ const Comments = () => {
   const params = useParams().postid
   const modalRef = useRef(null)
 
-
-  useEffect(() => {
+  const getList = () => {
     readAllComments(page, params).then(result => {
       setList(result.list)
       let pasingNumber = []
@@ -33,8 +32,7 @@ const Comments = () => {
       }
       setPagingBtn(pasingNumber)
     })
-  }, [page])
-  
+  }
   const modalOpen = () => {
     modalRef.current.style.opacity = 1
     modalRef.current.style.zIndex = 100
@@ -59,7 +57,7 @@ const Comments = () => {
     }
     addComments(newComments).then(bl => {
       if(bl) {
-        setPage(0)
+        getList()
         resetAuthor()
         resetContents()
       }
@@ -68,6 +66,11 @@ const Comments = () => {
       }
     })
   }
+  
+  useEffect(() => {
+    getList()
+  }, [page])
+  
   return (
     <CmArea>
       <CommentsTitle className="fcc">

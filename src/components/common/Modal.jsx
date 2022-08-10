@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { forwardRef, useRef } from "react";
+import { forwardRef } from "react";
 
 import FullPage from "components/common/FullPage";
 
