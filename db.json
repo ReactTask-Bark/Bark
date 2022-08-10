@@ -7,7 +7,48 @@
       "author": "작성자",
       "password": "qwe123",
       "writeDate": 1
+    },
+    {
+      "postId": "Ffmy9t0EMZMVXFZnbzk5W",
+      "contents": "내용",
+      "author": "",
+      "writeDate": 1660120432924,
+      "id": 1
+    },
+    {
+      "postId": "U6SOJKEs0nmyqolbOxFjN",
+      "contents": "내용2",
+      "author": "\b작성자2",
+      "writeDate": 1660120614247,
+      "id": 2
+    },
+    {
+      "postId": "aqTCMuzG1ksouKTyTVwif",
+      "contents": "내용3",
+      "author": "\b작성자3",
+      "writeDate": 1660120708765,
+      "id": 3
+    },
+    {
+      "postId": "tg8hJ_Xg3HYlYrMDYypL8",
+      "contents": "작성자4",
+      "author": "작성자 4",
+      "writeDate": 1660121140364,
+      "id": 4
+    },
+    {
+      "postId": "1LdVLqbDrFN_ypowU9MCv",
+      "contents": "ㅁㄴㅇㅁㄴㅇㅁㄴ",
+      "author": "ㅁㄴㅇㅁㄴㅇ",
+      "writeDate": 1660121305719,
+      "id": 5
+    },
+    {
+      "postId": "hy09zyp8fnszagiYuJQtB",
+      "contents": "ㅁㄴㅇㄴㅁㅇ",
+      "author": "asdasdㅁㄴㅇ",
+      "writeDate": 1660122082581,
+      "id": 6
     }
-  
   ]
 }
