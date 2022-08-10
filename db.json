@@ -4,7 +4,7 @@
       "id": 1,
       "postId": 1,
       "author": "조영은",
-      "contents": "날씨가ㄴㅇㄹ 너무 덥네요ㅇㄹㄴ"
+      "contents": "커서가 가야ㅇㄴㄻㄴㅇㄹ할거같은데ㄴㅁㅇㄹㅇㄴㅁ..."
     },
     {
       "postId": 2,
@@ -15,6 +15,32 @@
       "postId": 3,
       "author": "유지완",
       "contents": "날씨가 너무 덥네요"
+    }
+  ],
+  "comments": [
+    {
+      "commentsId": "GA9VL1NJyffmlPQN0u9rw",
+      "postId": "1",
+      "author": "ㄴㅇㄹ",
+      "writeDate": 1660118402188,
+      "coContents": "ㄴㅇㄹ",
+      "id": 1
+    },
+    {
+      "commentsId": "_7EFQS-h6bQkseeclCvff",
+      "postId": "1",
+      "author": "ㅁㅇㄴㄹ",
+      "writeDate": 1660118415597,
+      "coContents": "ㄴㅁㅇㄹㅇㄴㅁ",
+      "id": 2
+    },
+    {
+      "commentsId": "PoDKMzaH1eP_qNj2X3WdH",
+      "postId": "1",
+      "author": "asdf",
+      "writeDate": 1660119093624,
+      "coContents": "sadfs",
+      "id": 3
     }
   ]
 }
