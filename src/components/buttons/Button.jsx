@@ -1,5 +1,5 @@
 import styled from "styled-components"
-
+import { useNavigate } from "react-router-dom"
 const Button = (props) => {
     const btnColor = 
     props.children === "등록" ? "#006600" :
@@ -7,6 +7,12 @@ const Button = (props) => {
 
     const btnSize =
     props.buttonType === "comment" ? "20" : "30"
+    const navigate = useNavigate();
+    const handleronClick  = () => {
+        navigate("/writepost")
+    
+    }
+
     if (props.buttonType === "main") {
         return (
             <MainButton onClick={props.onClick} color={btnColor}>{props.children}</MainButton>

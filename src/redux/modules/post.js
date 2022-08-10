@@ -20,6 +20,18 @@ export const _LoadPostAll = createAsyncThunk(
     }
   }
 );
+export const Post = createAsyncThunk(
+    "Post", 
+  async (payload, api) => {
+    try {
+        const postList = await axios.post(process.env.REACT_APP_POSTPATH,payload)
+    return api.fulfillWithValue(postList.data)
+    
+    }catch(err) {
+        return api.rejectWithValue(err)
+    }
+  }
+);
 
 const postSlice = createSlice({
     name: "postSlice",          // 이 모듈의 이름
@@ -37,9 +49,22 @@ const postSlice = createSlice({
         [_LoadPostAll.rejected]: (state, action) => {
             state.isLoading = false;
             console.log(action.payload)
+        },
+        [Post.pending]: (state) => {
+            state.isLoading = true
+        },
+        [Post.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.list = [...state, action.payload]
+        },
+        [Post.rejected]: (state, action) => {
+            state.isLoading = false;
+            console.log(action.payload)
         }
     },
 });
+
+
 
 // action생성자 내보내기 => 쓰실때 주석 풀기
 // export const {} = postSlice.actions
