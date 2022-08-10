@@ -4,12 +4,12 @@ import styled from "styled-components";
 import Button from "components/buttons/Button";
 
 const Post = (props) => {
-  const item = props.comments ? props.comments : props.detailPost
+  const item = props.comments ? props.comments : props.detailPost;
   const itemWriteDate = new Date(item?.writeDate).toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
-    day: "numeric"
-  })
+    day: "numeric",
+  });
   return (
     <div>
       <PostInfo>

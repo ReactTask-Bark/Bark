@@ -1,22 +1,27 @@
+
 import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit"; //createSlice:리듀서를 만드는 함수,createAsyncThunk:미듈웨어중 썽크를 만드는 함수
 import axios from "apis/axiosInstance"
 
-const initialState = {          // 초기 값
-    isLoading: false,
-    list : []
-}
+
+const initialState = {
+  // 초기 값
+  isLoading: false,
+  list: [],
+};
 
 export const _LoadPostAll = createAsyncThunk(
-	// 첫번째 인자 : action value
-  "_LoadPostAll", 
-	// 두번째 인자 : 콜백함수 
+  // 첫번째 인자 : action value
+  "_LoadPostAll",
+  // 두번째 인자 : 콜백함수
   async (payload, api) => {
     try {
-        const postList = await axios.get(process.env.REACT_APP_POSTPATH)
-        const sliceList = postList.data.slice(0, payload + 5)
-        return api.fulfillWithValue(sliceList)
-    }catch(err) {
-        return api.rejectWithValue(err)
+      const postList = await axios.get(
+        process.env.REACT_APP_POSTPATH + "/post"
+      );
+      const sliceList = postList.data.slice(0, payload + 5);
+      return api.fulfillWithValue(sliceList);
+    } catch (err) {
+      return api.rejectWithValue(err);
     }
   }
 );
@@ -37,10 +42,16 @@ export const Post = createAsyncThunk( //createAsyncThunk(액션벨류, 콜백함
 //미들웨어야 리듀서한테 보내지 않고 사전 작업을 해주지!
 //미들웨어로 디스페치 하니까 리듀서가 아닌 엑스트라 리듀서를 만들어 사용
 const postSlice = createSlice({
-    name: "postSlice",          // 이 모듈의 이름
-    initialState,               // 이 모듈의 초기상태 값
-    reducers: {                 // 이 모듈의 Reducer 로직이자, 액션크리에이터
+  name: "postSlice", // 이 모듈의 이름
+  initialState, // 이 모듈의 초기상태 값
+  reducers: {
+    // 이 모듈의 Reducer 로직이자, 액션크리에이터
+  },
+  extraReducers: {
+    [_LoadPostAll.pending]: (state) => {
+      state.isLoading = true;
     },
+
     extraReducers: {  //얘가 중간다리 미들웨어 리듀서야! 너한테 dipatch할게
         [_LoadPostAll.pending]: (state) => {
             state.isLoading = true
@@ -64,7 +75,13 @@ const postSlice = createSlice({
             state.isLoading = false;
             console.log(action.payload)
         }
+
     },
+    [_LoadPostAll.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+    },
+  },
 });
 
 
