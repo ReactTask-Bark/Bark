@@ -1,7 +1,5 @@
-
-import { createAsyncThunk ,createSlice } from "@reduxjs/toolkit"; //createSlice:리듀서를 만드는 함수,createAsyncThunk:미듈웨어중 썽크를 만드는 함수
-import axios from "apis/axiosInstance"
-
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"; //createSlice:리듀서를 만드는 함수,createAsyncThunk:미듈웨어중 썽크를 만드는 함수
+import axios from "apis/axiosInstance";
 
 const initialState = {
   // 초기 값
@@ -15,10 +13,9 @@ export const _LoadPostAll = createAsyncThunk(
   // 두번째 인자 : 콜백함수
   async (payload, api) => {
     try {
-      const postList = await axios.get(
-        process.env.REACT_APP_POSTPATH + "/post"
-      );
+      const postList = await axios.get(process.env.REACT_APP_POSTPATH);
       const sliceList = postList.data.slice(0, payload + 5);
+      console.log(api.getState().post);
       return api.fulfillWithValue(sliceList);
     } catch (err) {
       return api.rejectWithValue(err);
@@ -26,15 +23,20 @@ export const _LoadPostAll = createAsyncThunk(
   }
 );
 
-export const Post = createAsyncThunk( //createAsyncThunk(액션벨류, 콜백함수); 모양이야.
-    "Post", 
-  async (payload, api) => { //async => 기다려줘~ 무엇을?
-    try {                   //axios 를 post 할때까지! (await~~)
-        const postList = await axios.post(process.env.REACT_APP_POSTPATH,payload) //간추린 모양은 -> Const postList = axios.post(url,payload)
-    return api.fulfillWithValue(postList.data) //api가 잘 들어 갔을때 postlist,data를 디스패치 해줘! 리턴했을때 async,await기다려주지않아 바로 리턴하니까 위에  해줌
-    
-    }catch(err) {
-        return api.rejectWithValue(err) //얘도 dispatch가 합쳐져 있다
+export const Post = createAsyncThunk(
+  //createAsyncThunk(액션벨류, 콜백함수); 모양이야.
+  "Post",
+  async (payload, api) => {
+    //async => 기다려줘~ 무엇을?
+    try {
+      //axios 를 post 할때까지! (await~~)
+      const postList = await axios.post(
+        process.env.REACT_APP_POSTPATH,
+        payload
+      ); //간추린 모양은 -> Const postList = axios.post(url,payload)
+      return api.fulfillWithValue(postList.data); //api가 잘 들어 갔을때 postlist,data를 디스패치 해줘! 리턴했을때 async,await기다려주지않아 바로 리턴하니까 위에  해줌
+    } catch (err) {
+      return api.rejectWithValue(err); //얘도 dispatch가 합쳐져 있다
     }
   }
 );
@@ -48,43 +50,31 @@ const postSlice = createSlice({
     // 이 모듈의 Reducer 로직이자, 액션크리에이터
   },
   extraReducers: {
+    //얘가 중간다리 미들웨어 리듀서야! 너한테 dipatch할게
     [_LoadPostAll.pending]: (state) => {
       state.isLoading = true;
     },
-
-    extraReducers: {  //얘가 중간다리 미들웨어 리듀서야! 너한테 dipatch할게
-        [_LoadPostAll.pending]: (state) => {
-            state.isLoading = true
-        },
-        [_LoadPostAll.fulfilled]: (state, action) => {
-            state.isLoading = false
-            state.list = action.payload
-        },
-        [_LoadPostAll.rejected]: (state, action) => {
-            state.isLoading = false;
-            console.log(action.payload)
-        },
-        [Post.pending]: (state) => {
-            state.isLoading = true
-        },
-        [Post.fulfilled]: (state, action) => {
-            state.isLoading = false
-            state.list = [...state, action.payload]
-        },
-        [Post.rejected]: (state, action) => {
-            state.isLoading = false;
-            console.log(action.payload)
-        }
-
+    [_LoadPostAll.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.list = action.payload;
     },
     [_LoadPostAll.rejected]: (state, action) => {
       state.isLoading = false;
       console.log(action.payload);
     },
+    [Post.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [Post.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      state.list = [...state, action.payload];
+    },
+    [Post.rejected]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.payload);
+    },
   },
 });
-
-
 
 // action생성자 내보내기 => 쓰실때 주석 풀기
 // export const {} = postSlice.actions
