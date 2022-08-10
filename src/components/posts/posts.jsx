@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import Button from "components/buttons/Button";
+import image from "Asset/BarkLogo.png";
+import Profile from "components/common/Profile";
 
 const Post = (props) => {
   const item = props.comments ? props.comments : props.detailPost;
@@ -13,7 +15,7 @@ const Post = (props) => {
   return (
     <div>
       <PostInfo>
-        <UserImg />
+        <UserImg src={image} />
         <UserInfo>
           <div style={{ display: "flex" }}>
             <UserName>{item?.author}</UserName>
@@ -41,15 +43,13 @@ const PostInfo = styled.div`
   background-color: #fff;
 `;
 
-const UserImg = styled.div`
+const UserImg = styled(Profile)`
+  margin: 0;
+  min-width: 50px;
   width: 50px;
+  min-height: 50px;
   height: 50px;
-  border-radius: 50%;
-  border: 1px solid pink;
-  align-items: center;
-  background-color: #eee;
 `;
-
 const UserInfo = styled.div`
   height: 70px;
   margin-left: 15px;
