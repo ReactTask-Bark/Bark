@@ -1,0 +1,20 @@
+{
+  "post": [
+    {
+      "id": 1,
+      "postId": 1,
+      "author": "조영은",
+      "contents": "날씨가ㄴㅇㄹ 너무 덥네요ㅇㄹㄴ"
+    },
+    {
+      "postId": 2,
+      "author": "박정우",
+      "contents": "날씨가 너무 덥네요"
+    },
+    {
+      "postId": 3,
+      "author": "유지완",
+      "contents": "날씨가 너무 덥네요"
+    }
+  ]
+}
