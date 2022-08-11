@@ -2,7 +2,7 @@ import axios from "apis/axiosInstance";
 
 export const readAllComments = async (page, postId) => {
   const commentsList = await axios.get(
-    process.env.REACT_APP_COMMENTSPATH + `?postId=${postId}`
+    process.env.REACT_APP_COMMENTSPATH + `?postName=${postId}`
   );
   const result = {
     list: commentsList.data.slice(page * 3, page * 3 + 3),

@@ -3,12 +3,14 @@ import styled from "styled-components";
 import Button from "components/buttons/Button";
 import { nanoid } from "nanoid";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function WritePost() {
-  const postId = nanoid(); //나노아이디 추가
+  const id = nanoid(); //나노아이디 추가
   const writeDate = new Date().getTime();
   const [contents, setContents] = useState("");
   const [author, setAuthor] = useState("");
+  const nav = useNavigate();
 
   const onChangeHandlerContents = (e3) => {
     setContents(e3.target.value);
@@ -19,10 +21,11 @@ function WritePost() {
 
   const addButton = (e) => {
     e.preventDefault();
-    const postList = { postId, contents, author, writeDate };
+    const postList = { id, contents, author, writeDate };
     axios.post(process.env.REACT_APP_POSTPATH, postList);
     setContents("");
     setAuthor("");
+    nav(-1);
   };
   return (
     <>
@@ -48,8 +51,7 @@ function WritePost() {
           <Button onClick={addButton} type="submit">
             등록
           </Button>
-          <Button>삭제</Button>
-          <Button>뒤로가기</Button>
+          <Button onClick={() => nav(-1)}>뒤로가기</Button>
         </ButtonArea>
       </Board>
     </>

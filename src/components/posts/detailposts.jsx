@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 import Button from "components/buttons/Button";
@@ -11,8 +11,9 @@ const DetailPost = () => {
   const postList = useSelector((state) => state.post.list);
   const param = useParams();
   const findPost = postList.find((post) => {
-    return post.postId === param.postid;
+    return post.id === param.postid;
   });
+  const nav = useNavigate();
 
   // input값 수정 및 저장
   const [content, setContent] = useState({
@@ -39,14 +40,8 @@ const DetailPost = () => {
   };
 
   //수정 내용 db에 저장하기
-  const editHandler = async (Id, edit) => {
-    const target = await axios.get(
-      process.env.REACT_APP_POSTPATH + `?postId=${Id}`
-    );
-    await axios.patch(
-      process.env.REACT_APP_POSTPATH + `/${target.data[0].id}`,
-      edit
-    );
+  const editHandler = async (id, edit) => {
+    await axios.patch(process.env.REACT_APP_POSTPATH + `/${id}`, edit);
   };
 
   const done = (e) => {
@@ -54,13 +49,9 @@ const DetailPost = () => {
     onToggle(e);
   };
 
-  const deleteHandler = async (Id = param.postid) => {
-    const target = await axios.get(
-      process.env.REACT_APP_POSTPATH + `?postId=${Id}`
-    );
-    await axios.delete(
-      process.env.REACT_APP_POSTPATH + `/${target.data[0].id}`
-    );
+  const deleteHandler = async (id = param.postid) => {
+    await axios.delete(process.env.REACT_APP_POSTPATH + `/${id}`);
+    nav(-1);
   };
 
   return (
@@ -95,7 +86,7 @@ const DetailPost = () => {
           ) : (
             <Button onClick={done}>저장</Button>
           )}
-          <Button onClick={deleteHandler}>삭제</Button>
+          <Button onClick={() => deleteHandler()}>삭제</Button>
         </ButtonArea>
       </PostInfo>
     </div>

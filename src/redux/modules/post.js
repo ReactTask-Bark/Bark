@@ -15,7 +15,6 @@ export const _LoadPostAll = createAsyncThunk(
     try {
       const postList = await axios.get(process.env.REACT_APP_POSTPATH);
       const sliceList = postList.data.slice(0, payload + 5);
-      console.log(api.getState().post);
       return api.fulfillWithValue(sliceList);
     } catch (err) {
       return api.rejectWithValue(err);
