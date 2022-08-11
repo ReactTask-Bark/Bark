@@ -1,13 +1,12 @@
-import FixedForm from "components/form/FixedForm"
-import WritePost from "components/writePost/WritePost"
+import FixedForm from "components/form/FixedForm";
+import WritePost from "components/writePost/WritePost";
 const WriteBoard = () => {
   return (
-      <>
-          <FixedForm/>
-          <WritePost/>
-      </>
-  )
-}
+    <>
+      <FixedForm />
+      <WritePost />
+    </>
+  );
+};
 
-
-export default WriteBoard
+export default WriteBoard;
