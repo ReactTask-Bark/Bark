@@ -40,6 +40,9 @@ const Post = (props) => {
     onToggle();
     editHandler(coContents);
   };
+  const deleteHandler = async (edit) => {
+    await axios.delete(process.env.REACT_APP_COMMENTSPATH + `/${item.id}`);
+  };
   return (
     <div>
       <PostInfo>
@@ -67,6 +70,14 @@ const Post = (props) => {
           <ButtonArea>
             <Button onClick={disabled ? onToggle : done}>
               {disabled ? "수정" : "완료"}
+            </Button>
+            <Button
+              onClick={() => {
+                deleteHandler();
+                props.setEmpty(1);
+              }}
+            >
+              삭제
             </Button>
           </ButtonArea>
         </UserInfo>
