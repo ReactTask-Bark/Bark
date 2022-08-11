@@ -120,7 +120,9 @@ const Userdate = styled.p`
 const UserContent = styled.input`
   font-weight: 400;
   border-radius: 5px;
+  background-color: white;
   border-color: #eee;
+  width: 400px;
 `;
 
 const ButtonArea = styled.div`
