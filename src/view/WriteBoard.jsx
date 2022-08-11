@@ -1,5 +1,5 @@
 import FixedForm from "components/form/FixedForm";
-import WritePost from "components/WritePost/WritePost";
+import WritePost from "components/writePost/WritePost";
 const WriteBoard = () => {
   return (
     <>
