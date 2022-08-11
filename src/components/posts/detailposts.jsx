@@ -32,6 +32,9 @@ const DetailPost = () => {
       contents: e.target.value,
     });
   };
+
+  //focus 구현
+
   const [disabled, setDisabled] = useState(true);
   const onToggle = (e) => {
     setDisabled(!disabled);
@@ -39,7 +42,6 @@ const DetailPost = () => {
 
   //수정 내용 db에 저장하기
   const editHandler = async (Id, edit) => {
-    // 얘도 바뀐거
     const target = await axios.get(
       process.env.REACT_APP_POSTPATH + `?postId=${Id}`
     );
@@ -54,11 +56,6 @@ const DetailPost = () => {
     onToggle(e);
   };
 
-  // 이건 나중에 지우세요
-  // const updateRef = useRef(null);
-  // updateRef.current.focus()
-  // ref={updateRef}
-
   return (
     <div>
       <PostInfo>
@@ -71,10 +68,10 @@ const DetailPost = () => {
             </div>
             {disabled ? (
               <UserContent
-                style={{ border: "none" }}
                 disabled={disabled}
                 onChange={onChange}
                 value={content.contents}
+                style={{ border: "none" }}
               />
             ) : (
               <UserContent
@@ -87,7 +84,7 @@ const DetailPost = () => {
         </PostContainer>
         <ButtonArea>
           {disabled ? (
-            <Button onClick={onToggle}> 수정 </Button>
+            <Button onClick={onToggle}>수정</Button>
           ) : (
             <Button onClick={done}>저장</Button>
           )}
@@ -136,8 +133,12 @@ const UserContent = styled.input`
   font-size: 15px;
   font-weight: 400;
   background-color: #fff;
-  border: none;
+  width: 400px;
+  height: 30px;
+  border-radius: 6px;
+  border-color: #eee;
 `;
+
 const ButtonArea = styled.div`
   height: 20px;
   margin-top: 5px;
