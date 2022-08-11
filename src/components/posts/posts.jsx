@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import Button from "components/buttons/Button";
 import image from "Asset/BarkLogo.png";
@@ -12,6 +14,41 @@ const Post = (props) => {
     month: "long",
     day: "numeric",
   });
+
+  const [coContents, setcoContents] = useState({
+    coContents: item.coContents,
+  });
+
+  // 내용 수정 함수
+  const onChange = (e) => {
+    setcoContents({
+      ...coContents,
+      coContents: e.target.value,
+    });
+  };
+
+  // 버튼으로 disabled 값 변경하기
+  const [disabled, setDisabled] = useState(true);
+  const onToggle = (e) => {
+    setDisabled(!disabled);
+  };
+  // db 저장함수
+  const param = useParams().postid;
+  const editHandler = async (edit) => {
+    const target = await axios.get(
+      process.env.REACT_APP_COMMENTSPATH + `?postId=${param}`
+    );
+    await axios.patch(
+      process.env.REACT_APP_COMMENTSPATH + `/${target.data[0]}`,
+      edit
+    );
+  };
+
+  const done = () => {
+    onToggle();
+    editHandler(coContents);
+  };
+
   return (
     <div>
       <PostInfo>
@@ -22,9 +59,24 @@ const Post = (props) => {
             <Userdate>{itemWriteDate}</Userdate>
           </div>
 
-          <UserContent>{item?.coContents}</UserContent>
+          {disabled ? (
+            <UserContent
+              disabled={disabled}
+              value={coContents.coContents}
+              onChange={onChange}
+              style={{ border: "none" }}
+            />
+          ) : (
+            <UserContent
+              disabled={disabled}
+              value={coContents.coContents}
+              onChange={onChange}
+            />
+          )}
           <ButtonArea>
-            <Button>수정</Button>
+            <Button onClick={disabled ? onToggle : done}>
+              {disabled ? "수정" : "완료"}
+            </Button>
             <Button>삭제</Button>
           </ButtonArea>
         </UserInfo>
@@ -65,8 +117,10 @@ const Userdate = styled.p`
   margin: auto 10px;
 `;
 
-const UserContent = styled.p`
+const UserContent = styled.input`
   font-weight: 400;
+  border-radius: 5px;
+  border-color: #eee;
 `;
 
 const ButtonArea = styled.div`
