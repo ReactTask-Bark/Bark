@@ -33,8 +33,6 @@ const DetailPost = () => {
     });
   };
 
-  //focus 구현
-
   const [disabled, setDisabled] = useState(true);
   const onToggle = (e) => {
     setDisabled(!disabled);
@@ -54,6 +52,15 @@ const DetailPost = () => {
   const done = (e) => {
     editHandler(param.postid, content);
     onToggle(e);
+  };
+
+  const deleteHandler = async (Id = param.postid) => {
+    const target = await axios.get(
+      process.env.REACT_APP_POSTPATH + `?postId=${Id}`
+    );
+    await axios.delete(
+      process.env.REACT_APP_POSTPATH + `/${target.data[0].id}`
+    );
   };
 
   return (
@@ -88,7 +95,7 @@ const DetailPost = () => {
           ) : (
             <Button onClick={done}>저장</Button>
           )}
-          <Button>삭제</Button>
+          <Button onClick={deleteHandler}>삭제</Button>
         </ButtonArea>
       </PostInfo>
     </div>
