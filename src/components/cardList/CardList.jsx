@@ -20,6 +20,10 @@ const CardList = () => {
 
   useEffect(() => {
     dispatch(_LoadPostAll(page));
+  }, []);
+
+  useEffect(() => {
+    dispatch(_LoadPostAll(page));
   }, [page]);
   useEffect(() => {
     if (lastCard && page < postList.length) setPage(page + 5);
