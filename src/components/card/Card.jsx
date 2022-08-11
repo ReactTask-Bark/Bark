@@ -4,34 +4,32 @@ import { forwardRef } from "react";
 
 import TitleText from "components/common/TitleText";
 import Profile from "components/common/Profile";
-import image from "Asset/BarkLogo.png"
+import image from "Asset/BarkLogo.png";
 
 // forwardRef = ref 하위로 전달용
 const Card = forwardRef((props, ref) => {
   const card = props.card;
   const writeDate = new Date(card.writeDate).toLocaleString("ko-KR", {
     month: "long",
-    day: "numeric"
-  })
+    day: "numeric",
+  });
   const navigate = useNavigate();
   return (
     <CardContainer
       onClick={() => {
-        navigate("/detailpost/" + card.postId);
+        navigate("/detailpost/" + card.id);
       }}
       ref={ref}
     >
       <TitleText>
         <div className="fcc" style={{ justifyContent: "flex-start" }}>
-          <CardProfile src={image}/>
+          <CardProfile src={image} />
           <div>
             <div>{card.author}</div>
-            <div style={{fontSize: "12px"}}>{writeDate}</div>
+            <div style={{ fontSize: "12px" }}>{writeDate}</div>
           </div>
         </div>
-        <p style={{ margin: '10px', height: "80px" }}>
-          {card.contents}
-        </p>
+        <p style={{ margin: "10px", height: "80px" }}>{card.contents}</p>
       </TitleText>
     </CardContainer>
   );
@@ -51,8 +49,10 @@ const CardContainer = styled.div`
 `;
 
 const CardProfile = styled(Profile)`
-  min-width: 50px; width: 50px;
-  min-height: 50px; height: 50px;
+  min-width: 50px;
+  width: 50px;
+  min-height: 50px;
+  height: 50px;
 `;
 
 export default Card;

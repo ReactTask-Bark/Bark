@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Router from "shared/Router";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 import Header from "components/header/Header";
 import LoadingPage from "view/Loding";
 
 function App() {
-  const isLoading = useSelector(state => state.post.isLoading)
+  const isLoading = useSelector((state) => state.post.isLoading);
   return (
     <>
       <HeaderArea>
@@ -17,11 +17,12 @@ function App() {
       <MainArea>
         <Layout>
           <Router></Router>
-          {isLoading && <LoadingPage/>}
+          {isLoading && <LoadingPage />}
         </Layout>
       </MainArea>
     </>
-)}
+  );
+}
 const Layout = styled.div`
   max-width: 1200px;
   min-width: 800px;
@@ -29,7 +30,8 @@ const Layout = styled.div`
 `;
 
 const HeaderArea = styled.div`
-  position: fixed; top:0;
+  position: fixed;
+  top: 0;
   min-width: 800px;
   width: 100%;
   box-shadow: 0 0 5px 0;

@@ -1,22 +1,84 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-// import { EditAlt } from "@styled-icons/boxicons-regular";
+import axios from "axios";
 
-const Post = () => {
+import Button from "components/buttons/Button";
+import image from "Asset/BarkLogo.png";
+import Profile from "components/common/Profile";
+
+const Post = (props) => {
+  const item = props.comments;
+  const itemWriteDate = new Date(item?.writeDate).toLocaleDateString("ko-KR", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const [coContents, setcoContents] = useState({
+    coContents: item.coContents,
+  });
+
+  // 내용 수정 함수
+  const onChange = (e) => {
+    setcoContents({
+      ...coContents,
+      coContents: e.target.value,
+    });
+  };
+
+  // 버튼으로 disabled 값 변경하기
+  const [disabled, setDisabled] = useState(true);
+  const onToggle = (e) => {
+    setDisabled(!disabled);
+  };
+  // db 저장함수
+  const editHandler = async (edit) => {
+    await axios.patch(process.env.REACT_APP_COMMENTSPATH + `/${item.id}`, edit);
+  };
+
+  const done = () => {
+    onToggle();
+    editHandler(coContents);
+  };
+  const deleteHandler = async (edit) => {
+    await axios.delete(process.env.REACT_APP_COMMENTSPATH + `/${item.id}`);
+  };
   return (
     <div>
       <PostInfo>
-        <UserImg />
+        <UserImg src={image} />
         <UserInfo>
           <div style={{ display: "flex" }}>
-            <UserName>Jack</UserName>
-            <Userdate>2022년 8월 8일</Userdate>
+            <UserName>{item?.author}</UserName>
+            <Userdate>{itemWriteDate}</Userdate>
           </div>
 
-          <UserContent>hello everyone</UserContent>
+          {disabled ? (
+            <UserContent
+              disabled={disabled}
+              value={coContents.coContents}
+              onChange={onChange}
+              style={{ border: "none" }}
+            />
+          ) : (
+            <UserContent
+              disabled={disabled}
+              value={coContents.coContents}
+              onChange={onChange}
+            />
+          )}
           <ButtonArea>
-            <Button>{/* <EditAlt size="15" /> */} edit</Button>
-            <Button>{/* <EditAlt size="15" /> */}✖ delete</Button>
+            <Button onClick={disabled ? onToggle : done}>
+              {disabled ? "수정" : "완료"}
+            </Button>
+            <Button
+              onClick={() => {
+                deleteHandler();
+                props.setEmpty(1);
+              }}
+            >
+              삭제
+            </Button>
           </ButtonArea>
         </UserInfo>
       </PostInfo>
@@ -34,15 +96,13 @@ const PostInfo = styled.div`
   background-color: #fff;
 `;
 
-const UserImg = styled.div`
+const UserImg = styled(Profile)`
+  margin: 0;
+  min-width: 50px;
   width: 50px;
+  min-height: 50px;
   height: 50px;
-  border-radius: 50%;
-  border: 1px solid pink;
-  align-items: center;
-  background-color: #eee;
 `;
-
 const UserInfo = styled.div`
   height: 70px;
   margin-left: 15px;
@@ -58,17 +118,18 @@ const Userdate = styled.p`
   margin: auto 10px;
 `;
 
-const UserContent = styled.p`
+const UserContent = styled.input`
   font-weight: 400;
+  border-radius: 5px;
+  background-color: white;
+  border-color: #eee;
+  width: 400px;
 `;
 
 const ButtonArea = styled.div`
   height: 20px;
   margin-top: 5px;
-`;
-
-const Button = styled.button`
-  border: none;
-  background-color: white;
-  margin-right: 10px;
+  & > button {
+    margin-right: 10px;
+  }
 `;
