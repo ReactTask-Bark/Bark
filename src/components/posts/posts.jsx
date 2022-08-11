@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useParams } from "react-router-dom";
 
 import Button from "components/buttons/Button";
 import image from "Asset/BarkLogo.png";
 import Profile from "components/common/Profile";
 
 const Post = (props) => {
-  const item = props.comments ? props.comments : props.detailPost;
+  const item = props.comments;
   const itemWriteDate = new Date(item?.writeDate).toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
@@ -33,22 +32,14 @@ const Post = (props) => {
     setDisabled(!disabled);
   };
   // db 저장함수
-  const param = useParams().postid;
   const editHandler = async (edit) => {
-    const target = await axios.get(
-      process.env.REACT_APP_COMMENTSPATH + `?postId=${param}`
-    );
-    await axios.patch(
-      process.env.REACT_APP_COMMENTSPATH + `/${target.data[0]}`,
-      edit
-    );
+    await axios.patch(process.env.REACT_APP_COMMENTSPATH + `/${item.id}`, edit);
   };
 
   const done = () => {
     onToggle();
     editHandler(coContents);
   };
-
   return (
     <div>
       <PostInfo>
@@ -77,7 +68,6 @@ const Post = (props) => {
             <Button onClick={disabled ? onToggle : done}>
               {disabled ? "수정" : "완료"}
             </Button>
-            <Button>삭제</Button>
           </ButtonArea>
         </UserInfo>
       </PostInfo>

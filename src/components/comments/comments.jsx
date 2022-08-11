@@ -48,8 +48,8 @@ const Comments = () => {
       return;
     }
     const newComments = {
-      commentsId: nanoid(),
-      postId: params,
+      id: nanoid(),
+      postName: params,
       author,
       writeDate: new Date().getTime(),
       coContents: contents,
@@ -78,7 +78,7 @@ const Comments = () => {
         </span>
       </CommentsTitle>
       {commentsList.map((c) => {
-        return <Post comments={c} key={c.commentsId} />;
+        return <Post comments={c} key={c.id} />;
       })}
       <BtnArea className="fcc">
         {pagingBtn.map((p, i) => {
