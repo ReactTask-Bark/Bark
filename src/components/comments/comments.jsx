@@ -14,6 +14,7 @@ const Comments = () => {
   const [commentsList, setList] = useState([]);
   const [pagingBtn, setPagingBtn] = useState([]);
   const [page, setPage] = useState(0);
+  const [empty, setEmpty] = useState(0);
 
   // 강의에 있는 커스텀 훅 살짝 커스텀해서 씀
   const [author, changeAuthor, resetAuthor] = useLimitInput(10);
@@ -67,7 +68,8 @@ const Comments = () => {
 
   useEffect(() => {
     getList();
-  }, [page]);
+    setEmpty(0);
+  }, [page, empty]);
 
   return (
     <CmArea>
@@ -78,7 +80,7 @@ const Comments = () => {
         </span>
       </CommentsTitle>
       {commentsList.map((c) => {
-        return <Post comments={c} key={c.id} />;
+        return <Post comments={c} key={c.id} setEmpty={setEmpty} />;
       })}
       <BtnArea className="fcc">
         {pagingBtn.map((p, i) => {
